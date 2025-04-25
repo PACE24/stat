@@ -1,0 +1,21 @@
+
+clc;clear;clf;
+N=input("enter number of seperate experiment : ");
+for i=1:N
+n=input("no of coins : ");
+tms=2^n;
+disp("macro   micro   prob");
+for j=0:1:n
+    nms= factorial(n)/(factorial(j)*factorial(n-j));
+    pr(j+1)=nms/tms;
+    k= n-j;
+    l(j+1)=j;
+    disp([k j nms  pr(j+1) ]);
+end
+plot(l,pr,'o-','linewidth',1);
+title("number of coins: " +string(n),'fontsize',2); //chage if oly one
+xlabel('number of heads,n(h)','fontsize',2);
+ylabel('probability,p(h)','fontsize',2);
+legend("n = "+string(n));
+xgrid(20);
+end
