@@ -1,0 +1,33 @@
+
+clc;clear;clf;
+e=1.6e-19;k=1.38e-23;
+u=0;
+E=-0.5:0.001:0.5;
+T=100:200:1100;
+To=500;
+dist=['Bose Einstein','Maxwell Boltzmen','Fermi Dirac'];
+a=-1;
+for n=1:3
+    for j=1:length(T)
+        if To==T(j)
+            q=j;
+        end    
+        for i=1:length(E)
+            f(j,i)=1/(exp(((E(i)-u)*e)/(k*T(j)))+a);
+        end
+    end         
+a=a+1;
+subplot(2,2,n)
+plot(E',f','linewidth',2);
+xlabel('Energy (eV)','fontsize',3);
+ylabel('f(E)','fontsize',3);
+legend('T = '+string(T)+' K');
+title(string(dist(n))+' distribution for u='+string(u),'fotsize',3);
+C(n,:)=f(q,:);
+end
+subplot(2,2,4)
+plot(E',C','linewidth',2);
+xlabel('Energy (eV)','fontsize',3);
+ylabel('f(E)','fontsize',3);
+legend(string(dist)+' distribution',3);
+title('Temperature = '+string(T(q))+' K','fontsize',3);
